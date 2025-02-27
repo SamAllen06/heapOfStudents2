@@ -72,5 +72,5 @@ std::string Student::getLastFirst(){
 } //end getLastFirst
 
 std::string Student::getLast(){
-	return lName
+	return lName;
 } //end getLast
