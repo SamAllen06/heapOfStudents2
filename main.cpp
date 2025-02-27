@@ -1,15 +1,19 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <vector>
+#include "student.h"
+#include "date.h"
+#include "address.h"
 
 std::string menu();
-void loadStudents(students);
-void printStudents(students);
-void printStudentNames(students);
-void searchStudents(students);
-void delStudents(students);
+void loadStudents(std::vector<Student>& students);
+void printStudents(std::vector<Student>& students);
+void printStudentNames(std::vector<Student>& students);
+void searchStudents(std::vector<Student>& students);
+void delStudents(std::vector<Student>& students);
 
-int main{
+int main(){
 	bool keepGoing = true;
 	std::string userChoice = "";
 	
@@ -51,33 +55,58 @@ std::string menu(){
 	return userChoice;
 } //end menu definition
 
-void loadStudents(students){
-	int studentNum = 0;
-	
-	std::ofstream outFile;
-	outFile.open("students.csv");
+void loadStudents(std::vector<Student> students){
+	std::ifstream inFile;
+	std::string studentLine;
+	inFile.open("students.csv");
 
-	while (getline(outFile, studentLine)){
-		Student* student.studentNum = new Student();
+	while (getline(inFile, studentLine)){
+		Student* student = new Student();
+		student->init(studentLine);
 
-		students.push_back(student.studentNum);
-
-		studentNum++;
+		students.push_back(student);
 	} //end while loop
+	inFile.close();
 } //end loadStudents definition
 
-void printStudents(students){
-	
+void printStudents(std::vector<Student> students){
+	int i;
+	for (i = 0; i < students.size(); i++){
+		students[i]->printStudent();
+	} //end for loop
 } //end printStudents definition
 
-void printStudentNames(students){
-	
+void printStudentNames(std::vector<Student> students){
+	int i;
+	for (i = 0; i < students.size(); i++){
+		std::cout << students[i]->getLastFirst() << std::endl;
+	} //end for loop
 } //end printStudentNames definition
 
-void searchStudents(students){
-	
+void searchStudents(std::vector<Student> students){
+	std::string searchQuery = "";
+	int results = 0;
+	int i;
+
+	std::cout << "Enter last name: ";
+	std::cin.clear();
+	std::cin >> searchQuery;
+
+	for (i = 0; i < students.size(); i++){
+		if (lastName.find(searchQuery) != std::string::npos){
+			std::cout << students[i]->getLast() << std::endl;
+			results++;
+		} //end if statement
+	} //end for loop
+	if (results == 0){
+		std::cout << "No results, sorry" << std::endl;
+	} //end if statement	
 } //end searchStudents definition
 
-void delStudents(students){
-	
+void delStudents(std::vector<Student> students){
+	int i;
+
+	for (i = 0; i < students.size(); i++){
+		delete students[i];
+	} //end for loop
 } //end delStudents definition

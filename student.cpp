@@ -71,3 +71,6 @@ std::string Student::getLastFirst(){
 	return lastFirst;
 } //end getLastFirst
 
+std::string Student::getLast(){
+	return lName
+} //end getLast

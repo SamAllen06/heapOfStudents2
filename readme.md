@@ -45,7 +45,7 @@ void searchStudents(students vector)
 	print "Enter last name: "
 	put response in searchQuery
 	start a for loop using the number of items in the student vector
-		parse getLastFirst to get just the last name, store in lastName
+		use getLast() function to get the last name
 		if lastName.find(searchQuery) is not equal to std::string::npos
 			print getLastFirst() for that student
 
